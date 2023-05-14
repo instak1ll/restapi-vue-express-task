@@ -31,6 +31,13 @@ app.put('/api/tasks/:id', (req, res) => {
     }
 })
 
+//DELETE
+app.delete('/api/tasks/:id', (req, res) => {
+    const { id } = req.params
+    tasks = tasks.filter(task => task.id !== id)
+    res.json({ message: 'Tarea eliminada' })
+})
+
 //POST
 app.post('/api/tasks', (req, res) => {
     const { name, completed } = req.body

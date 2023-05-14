@@ -57,6 +57,22 @@ new Vue({
             }
         },
 
+        //DELETE
+        async deleteTask(taskId) {
+            try {
+                const response = await fetch(`/api/tasks/${taskId}`, {
+                    method: 'DELETE'
+                })
+                if (response.ok) {
+                    this.tasks = this.tasks.filter(task => task.id !== taskId)
+                } else {
+                    console.log('Error al eliminar tarea')
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        },
+
         //GET
         async loadTasks() {
             try {
