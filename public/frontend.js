@@ -37,6 +37,26 @@ new Vue({
             }
         },
 
+        //PUT
+        async markTask(taskId) {
+            try {
+                const task = this.tasks.find(task => task.id === taskId)
+                task.completed = true
+                const response = await fetch(`api/tasks/${taskId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ completed: true })
+                })
+                if (!response.ok) {
+                    console.log('Error al marcar tarea')
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        },
+
         //GET
         async loadTasks() {
             try {

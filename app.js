@@ -19,6 +19,18 @@ app.get('/api/tasks', (req, res) => {
     res.json(tasks)
 })
 
+//PUT
+app.put('/api/tasks/:id', (req, res) => {
+    const { id } = req.params
+    const task = tasks.find(task => task.id === id)
+    if (task) {
+        task.completed = true
+        res.json(task)
+    } else {
+        res.status(404).json({ message: 'Tarea no encontrada' })
+    }
+})
+
 //POST
 app.post('/api/tasks', (req, res) => {
     const { name, completed } = req.body
